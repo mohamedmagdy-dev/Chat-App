@@ -8,7 +8,8 @@ export default function Input({ type, placeHolder, value, onChange, name }) {
       onChange={(e) => onChange(e.target.value)}
       className={`${
         value.length >= 1 ? "text-dark" : "text-gray-400"
-      }  outline-none p-2 text-md  border border-gray-300 rounded `}
+      }  outline-none pl-4 p-3 text-sm border border-gray-300 dark:bg-[#292929] dark:border-none rounded
+      dark:text-white `}
     />
   );
 }

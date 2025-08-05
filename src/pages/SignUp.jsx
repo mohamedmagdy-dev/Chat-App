@@ -48,9 +48,9 @@ export default function SignUp() {
           <PageLink route="/reset-password" pageName="Reset Password" />
         </div>
         <FormButton title="SIGN IN" onClick={signIn} />
-        <p className="text-center text-md text-gray-600 ">
+        <p className="text-center text-md text-gray-600 dark:text-white">
           Don't have an account?
-          <PageLink route="/signup" pageName="Sign up." />
+          <PageLink route="/signup" pageName="Sign up" />
         </p>
       </Form>
     </>
