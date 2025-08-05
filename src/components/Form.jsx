@@ -3,7 +3,7 @@ import PagePattern from "../assets/bgPatterns.svg";
 export default function Form({ children }) {
   return (
     <div
-      className={`min-h-[100vh] w-full  flex items-center justify-center bg-white dark:bg-dark`}
+      className={`min-h-[100svh] w-full  flex items-center justify-center bg-white dark:bg-dark`}
       style={{
         backgroundImage: `url(${PagePattern})`,
       }}
