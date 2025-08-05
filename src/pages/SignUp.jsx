@@ -9,12 +9,13 @@ import PageLink from "../components/ui/PageLink";
 import FormButton from "../components/ui/FormButton";
 
 export default function SignUp() {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
 
   // Handel Sign In Logic
-  function signIn(e) {
+  function signUp(e) {
     e.preventDefault();
   }
 
@@ -22,8 +23,15 @@ export default function SignUp() {
     <>
       <Form>
         <FormInfo
-          title="Sign in"
+          title="Sign Up"
           desc="We are Different, We Make You Different."
+        />
+        <Input
+          name="name"
+          type="text"
+          placeHolder="Enter Your Name"
+          value={name}
+          onChange={setName}
         />
         <Input
           name="email"
@@ -39,18 +47,10 @@ export default function SignUp() {
           value={password}
           onChange={setPassword}
         />
-        <div className="flex justify-between items-center gap-5 flex-wrap">
-          <CheckBox
-            label="Remember me"
-            isChecked={rememberMe}
-            onChange={setRememberMe}
-          />
-          <PageLink route="/reset-password" pageName="Reset Password" />
-        </div>
-        <FormButton title="SIGN IN" onClick={signIn} />
+        <FormButton title="SIGN UP" onClick={signUp} />
         <p className="text-center text-md text-gray-600 dark:text-white">
-          Don't have an account?
-          <PageLink route="/signup" pageName="Sign up" />
+          Already have an account?
+          <PageLink route="/signin" pageName="Sign in" />
         </p>
       </Form>
     </>
