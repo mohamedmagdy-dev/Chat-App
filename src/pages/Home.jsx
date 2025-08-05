@@ -1,3 +1,12 @@
+import Aside from "../components/Aside";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 export default function Home() {
-  return <div>Hello From Home</div>;
+  const { user } = useContext(AuthContext);
+  console.log(user);
+  return (
+    <div>
+      <Aside />
+    </div>
+  );
 }

@@ -17,7 +17,7 @@ export default function ResetPassword() {
 
   return (
     <>
-      <Form>
+      <Form onSubmit={resetPassword}>
         <FormInfo
           title="Password Reset"
           desc="Enter your email address to reset password."
@@ -29,7 +29,7 @@ export default function ResetPassword() {
           value={email}
           onChange={setEmail}
         />
-        <FormButton title="SEND RESET LINK" onClick={resetPassword} />
+        <FormButton title="SEND RESET LINK" />
         <p className="text-center text-md text-gray-600 dark:text-white">
           Already have an account?
           <PageLink route="/signin" pageName="Sign in" />

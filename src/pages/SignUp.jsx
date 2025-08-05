@@ -19,7 +19,7 @@ export default function SignUp() {
 
   return (
     <>
-      <Form>
+      <Form onSubmit={signUp}>
         <FormInfo
           title="Sign Up"
           desc="We are Different, We Make You Different."
@@ -45,7 +45,7 @@ export default function SignUp() {
           value={password}
           onChange={setPassword}
         />
-        <FormButton title="SIGN UP" onClick={signUp} />
+        <FormButton title="SIGN UP"/>
         <p className="text-center text-md text-gray-600 dark:text-white">
           Already have an account?
           <PageLink route="/signin" pageName="Sign in" />
