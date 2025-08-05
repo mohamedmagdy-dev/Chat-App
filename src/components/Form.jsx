@@ -8,9 +8,7 @@ export default function Form({ children }) {
         backgroundImage: `url(${PagePattern})`,
       }}
     >
-      <form className="flex flex-col gap-5 max-md:w-[80%] md:w-[380px] ">
-        {children}
-      </form>
+      <form className="flex flex-col gap-5 max-md:w-[80%] md:w-[400px] p-4">{children}</form>
     </div>
   );
 }

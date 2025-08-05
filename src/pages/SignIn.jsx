@@ -39,7 +39,7 @@ export default function SignIn() {
           value={password}
           onChange={setPassword}
         />
-        <div className="flex justify-between items-center gap-5">
+        <div className="flex justify-between items-center gap-5 flex-wrap">
           <CheckBox
             label="Remember me"
             isChecked={rememberMe}
