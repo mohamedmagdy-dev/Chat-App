@@ -5,24 +5,63 @@ import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import Home from "./pages/Home";
 import ResetPassword from "./pages/ResetPassword";
-import { AuthProvider } from "./context/AuthProvider";
+import Friends from "./pages/Friends"
+import Calls from "./pages/Calls"
+import Profile from "./pages/Profile"
+
 // Import Components
 import DarkModToggle from "./components/ui/DarkModToggle";
-// Import Context
+import ProductRoutes from "./components/ProductRoutes";
 export default function App() {
   return (
     <>
       {/* DarkModToggle */}
       <DarkModToggle />
-      <AuthProvider>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/reset-password" element={<ResetPassword />} />
-        </Routes>
-      </AuthProvider>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <ProductRoutes>
+              <Home />
+            </ProductRoutes>
+          }
+        />
+        <Route
+          path="/home"
+          element={
+            <ProductRoutes>
+              <Home />
+            </ProductRoutes>
+          }
+        />
+        <Route
+          path="/calls"
+          element={
+            <ProductRoutes>
+              <Calls />
+            </ProductRoutes>
+          }
+        />
+        <Route
+          path="/friends"
+          element={
+            <ProductRoutes>
+              <Friends />
+            </ProductRoutes>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <ProductRoutes>
+              <Profile />
+            </ProductRoutes>
+          }
+        />
+        <Route path="/signin" element={<SignIn />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
+      </Routes>
     </>
   );
 }

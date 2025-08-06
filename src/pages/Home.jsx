@@ -1,12 +1,12 @@
 import Aside from "../components/Aside";
-import { useContext } from "react";
-import { AuthContext } from "../context/AuthContext";
+import Chats from "../components/Chats";
+import ChatRoom from "../components/ChatRoom";
 export default function Home() {
-  const { user } = useContext(AuthContext);
-  console.log(user);
   return (
-    <div>
+    <div className="flex">
       <Aside />
+      <Chats />
+      <ChatRoom />
     </div>
   );
 }

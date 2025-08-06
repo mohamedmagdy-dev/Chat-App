@@ -1,6 +1,7 @@
-import { useState, useContext } from "react";
-import { AuthContext } from "../context/AuthContext";
-import axios from "axios";
+import { useState } from "react";
+
+//Import React Router
+import { useNavigate } from "react-router";
 // Import Components
 import Form from "../components/Form";
 import Input from "../components/ui/Input";
@@ -8,32 +9,27 @@ import FormInfo from "../components/ui/FormInfo";
 import CheckBox from "../components/ui/CheckBox";
 import PageLink from "../components/ui/PageLink";
 import FormButton from "../components/ui/FormButton";
+import { login } from "../features/auth/authSlicer";
+import { useDispatch } from "react-redux";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(null);
   const [rememberMe, setRememberMe] = useState(false);
-  const { login } = useContext(AuthContext);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  //
 
   // Handel Sign In Logic
   async function signIn(e) {
     e.preventDefault();
-    setError(null);
     try {
-      const response = await axios.post(
-        "http://localhost:3001/api/auth/login",
-        {
-          email,
-          password,
-        }
-      );
-      const user = response.data.user;
-      login(user);
-      setEmail("");
-      setPassword("");
-    } catch (err) {
-      setError("Invalid email or login failed.");
+      await dispatch(login({ email, password })).unwrap();
+
+      navigate("/home");
+    } finally {
+      console.log();
     }
   }
 
@@ -71,7 +67,6 @@ export default function SignIn() {
           Don't have an account?
           <PageLink route="/signup" pageName="Sign up" />
         </p>
-        {error && <p className="text-red-500 text-sm">{error}</p>}
       </Form>
     </>
   );
