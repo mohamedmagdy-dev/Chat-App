@@ -6,7 +6,7 @@ export const fetchFriends = createAsyncThunk(
   async ({ email }, thunkApi) => {
     try {
       const response = await axios.get(
-        `http://localhost:3001/api/friends?email=${email}`
+        `https://chat-app-backend-by-ai-production.up.railway.app/api/friends?email=${email}`
       );
 
       return response.data;

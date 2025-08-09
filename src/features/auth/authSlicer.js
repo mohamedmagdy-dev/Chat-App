@@ -6,7 +6,7 @@ export const login = createAsyncThunk(
   async ({ email, password }, thunkApi) => {
     try {
       const response = await axios.post(
-        "http://localhost:3001/api/auth/login",
+        "https://chat-app-backend-by-ai-production.up.railway.app/api/auth/login",
         {
           email,
           password,
