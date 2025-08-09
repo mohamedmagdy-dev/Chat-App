@@ -2,39 +2,46 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchFriends } from "../features/friends/friends";
 import { selectFriendToChat } from "../features/chat friend/chatFriend";
-
+import { openChatBox } from "../features/chat box/chatBox";
+import { CardsContainer } from "./ui/SideContainer";
 export default function Users() {
   const { user } = useSelector((state) => state.Auth);
   const [activeChat, setActiveChat] = useState(null);
   const { friends, isLoading } = useSelector((state) => state.friends);
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(fetchFriends(user.email));
   }, [dispatch, user.email]);
 
   return (
-    <div className="mt-3 flex flex-col gap-3 bg-[#f7f9fa] h-[calc(100%-106px)] pb-[84px] px-3 py-6 overflow-auto dark:bg-[#2a2a2a]">
+    <CardsContainer>
       {isLoading ? (
         <p className="text-center text-gray-400">Loading friends...</p>
       ) : friends.length === 0 ? (
         <p className="text-center text-gray-400">No friends found.</p>
       ) : (
-        friends.map((friend) => (
-          <User
-            key={friend.id}
-            userImg={friend.avatar}
-            msgTime="just now"
-            userName={friend.username}
-            lastMsg="You can start a chat"
-            isActive={friend.id === activeChat}
-            onClick={() => {
-              dispatch(selectFriendToChat(friend));
-              setActiveChat(friend.id);
-            }}
-          />
-        ))
+        friends.map((friend) => {
+          if (friend.id !== user.id) {
+            return (
+              <User
+                key={friend.id}
+                userImg={friend.avatar}
+                msgTime="just now"
+                userName={friend.username}
+                lastMsg="You can start a chat"
+                isActive={friend.id === activeChat}
+                onClick={() => {
+                  dispatch(selectFriendToChat(friend));
+                  dispatch(openChatBox());
+                  setActiveChat(friend.id);
+                }}
+              />
+            );
+          }
+        })
       )}
-    </div>
+    </CardsContainer>
   );
 }
 

@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import socket from "../socket/socket";
 
+import socket from "../socket/socket";
+import PagePattern from "../assets/bgPatterns.svg";
 import ShortcutIcon from "@mui/icons-material/Shortcut";
 import Msg from "./ui/Msg";
 export default function ChatRoom() {
   const [allMessages, setAllMessages] = useState([]);
   const { user } = useSelector((state) => state.Auth);
   const { selectedFriend } = useSelector((state) => state.chatFriend);
-
+  const { isOpened } = useSelector((state) => state.chatBox);
+  console.log(allMessages);
   useEffect(() => {
     if (user) {
       socket.connect();
@@ -21,25 +23,31 @@ export default function ChatRoom() {
     }
     return () => {
       socket.off("receiveMessage");
-      socket.disconnect();
+      // socket.disconnect();
     };
   }, [user]);
 
   return (
-    <>
+    <div
+      className={` max-lg:fixed transform duration-200 bg-white dark:bg-[#323333] flex justify-center items-center  ${
+        isOpened ? "max-lg:translate-x-[0%]" : " max-lg:translate-x-[-100%]"
+      } w-full  z-5
+      `}
+      style={{ backgroundImage: `url(${PagePattern})` }}
+    >
       {selectedFriend ? (
         <ChatBox allMessages={allMessages} setAllMessages={setAllMessages} />
       ) : (
         <FirstLoad user={user} />
       )}
-    </>
+    </div>
   );
 }
 
 export function ChatBox({ allMessages, setAllMessages }) {
   console.log(allMessages);
   return (
-    <div className="relative w-full max-h-svh overflow-x-auto  dark:bg-[#323333]">
+    <div className="relative w-full h-svh overflow-x-auto  dark:bg-[#323333]">
       <TopChatRoom />
       <div className="flex flex-col gap-6 py-4 px-8 h-[calc(100%-150px)] overflow-hidden">
         {allMessages.map((msg, i) => {
@@ -62,7 +70,7 @@ export function TopChatRoom() {
   const { selectedFriend } = useSelector((state) => state.chatFriend);
 
   return (
-    <div className="info flex gap-3 items-center bg-white dark:bg-[#323333] dark:border-[#2a2a2e] p-4 border-b border-gray-300 shadow-sm w-full h-fit sticky z-3  top-0">
+    <div className="info flex gap-3 items-center  bg-white dark:bg-[#323333] dark:border-[#2a2a2e] p-4 border-b border-gray-300 shadow-sm w-full h-fit sticky z-3  top-0">
       <img
         src={selectedFriend.avatar}
         alt="Friend Img"
@@ -87,8 +95,13 @@ export function ChatRoomControls({ setAllMessages }) {
         sender: user.email,
         receiver: selectedFriend.email,
         content: msg,
-        createdAt: `${new Date()}`,
+        createdAt: new Date().toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+        }),
       };
+      console.log("Sender:", user.email);
+      console.log("Receiver:", selectedFriend.email);
       socket.emit("sendMessage", messageData);
 
       setAllMessages((prev) => [...prev, messageData]);

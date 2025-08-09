@@ -12,7 +12,7 @@ export default function DarkModToggle() {
   return (
     <button
       onClick={handelChangeMode}
-      className="cursor-pointer select-none outline-none w-fit h-fit z-5 fixed right-10 top-10 before:w-2 before:h-2  before:z-3 before:absolute before:bg-green-400 before:left-[-4px] before:rounded-full"
+      className="cursor-pointer select-none outline-none w-fit h-fit z-6 fixed right-8 top-8 before:w-2 before:h-2  before:z-3 before:absolute before:bg-green-400 before:left-[-4px] before:rounded-full"
     >
       <img
         src={DarkLightImg}
